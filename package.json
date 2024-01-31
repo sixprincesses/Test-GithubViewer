@@ -4,13 +4,20 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host 70.12.247.82",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@toast-ui/editor": "^3.2.2",
+    "@toast-ui/react-editor": "^3.2.3",
+    "ace-builds": "^1.32.5",
+    "axios": "^1.6.7",
     "react": "^18.2.0",
+    "react-ace": "^10.1.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {

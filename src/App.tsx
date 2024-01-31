@@ -1,35 +1,68 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import pause from "./asset/pause.png";
+import play from "./asset/play.png";
+import CodeEditor from "./components/CodeEditor";
+import Github from "./components/Github";
+import Markdown from "./components/Markdown";
+import {
+  Cancle,
+  Confirm,
+  ControlBtn,
+  Controller,
+  Dropdown,
+  DropdownBtn,
+  DropdownMenu,
+  DropdownOption,
+  EditorBox,
+  Footer,
+  FooterBtns,
+  Header,
+  Layout,
+  Timer,
+  ViewerBox,
+  Wrapper,
+} from "./style/AppStyle";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isPlay, setIsPlay] = useState(false);
+  const [files, setFiles] = useState(new Map());
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Layout>
+      <Wrapper>
+        <Header>
+          <Timer>00:00:00</Timer>
+          <Controller>
+            {isPlay ? (
+              <ControlBtn src={play} alt="일시정지" />
+            ) : (
+              <ControlBtn src={pause} alt="재생" />
+            )}
+          </Controller>
+        </Header>
+        <EditorBox>
+          <Github files={files} setFiles={setFiles} />
+          <Markdown />
+          <CodeEditor />
+        </EditorBox>
+        <ViewerBox></ViewerBox>
+        <Footer>
+          <Dropdown>
+            <DropdownBtn>+</DropdownBtn>
+            <DropdownMenu>
+              <DropdownOption>Markdown</DropdownOption>
+              <DropdownOption>Code Editor</DropdownOption>
+              <DropdownOption>Github</DropdownOption>
+            </DropdownMenu>
+          </Dropdown>
+          <FooterBtns>
+            <Cancle>취소</Cancle>
+            <Confirm>저장</Confirm>
+          </FooterBtns>
+        </Footer>
+      </Wrapper>
+    </Layout>
+  );
 }
 
-export default App
+export default App;
