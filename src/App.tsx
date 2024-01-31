@@ -22,6 +22,7 @@ import {
   ViewerBox,
   Wrapper,
 } from "./style/AppStyle";
+import MarkdownViewer from "./components/MarkdownViewer";
 
 function App() {
   const [isPlay, setIsPlay] = useState(false);
@@ -45,7 +46,9 @@ function App() {
           <Markdown />
           <CodeEditor />
         </EditorBox>
-        <ViewerBox></ViewerBox>
+        <ViewerBox>
+          <MarkdownViewer files={files} setFiles={setFiles} />
+        </ViewerBox>
         <Footer>
           <Dropdown>
             <DropdownBtn>+</DropdownBtn>
