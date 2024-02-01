@@ -114,24 +114,21 @@ const Github = ({ files, setFiles }: GithubProps) => {
 
   const handleCheck = (e: ChangeEvent<HTMLInputElement>, value: any) => {
     if (e.target.checked) {
-      if (files.get(value[4])) {
+      if (files.has(value[4])) {
         files.get(value[4]).push({ lineNo: value[6], value: value });
       } else {
         files.set(value[4], [{ lineNo: value[6], value: value }]);
       }
-      setFiles(files);
+      setFiles(new Map(files));
     } else {
-      const filtered = files.get(value[4]).filter((line) => {
-        if (line.lineNo === value[6] && line.value === value) {
-          return false;
-        } else {
-          return true;
-        }
-      });
-      files.set(value[4], filtered);
-      setFiles(files);
+      if (files.has(value[4])) {
+        const filtered = files
+          .get(value[4])
+          .filter((line) => !(line.lineNo === value[6]));
+        files.set(value[4], filtered);
+        setFiles(new Map(files));
+      }
     }
-    console.log(files);
   };
 
   return (
