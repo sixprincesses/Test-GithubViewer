@@ -11,29 +11,137 @@ const gitPlugin = () => {
   const toHTMLRenderers = {
     GitPlus(node: any) {
       let body = node.literal;
+      const bodyList = body.split(" ");
+      console.log(bodyList);
       return [
         {
           type: "openTag",
           tagName: "div",
           outerNewLine: true,
           attributes: {
-            style: `color:hotpink; background-color:black; `,
+            style: `color:hotpink; background-color:black; display: grid; grid-template-columns: repeat(4, 1fr); line-height: 20px`,
           },
         },
-        { type: "html", content: body },
+        {
+          type: "openTag",
+          tagName: "div",
+          outerNewLine: true,
+          attributes: {
+            style: `color:hotpink; background-color:black;`,
+          },
+        },
+        {
+          type: "html",
+          content: bodyList[0],
+        },
+        { type: "closeTag", tagName: "div", outerNewLine: true },
+        {
+          type: "openTag",
+          tagName: "div",
+          outerNewLine: true,
+          attributes: {
+            style: `color:hotpink; background-color:black;`,
+          },
+        },
+        {
+          type: "html",
+          content: bodyList[1],
+        },
+        { type: "closeTag", tagName: "div", outerNewLine: true },
+        {
+          type: "openTag",
+          tagName: "div",
+          outerNewLine: true,
+          attributes: {
+            style: `color:hotpink; background-color:black;`,
+          },
+        },
+        {
+          type: "html",
+          content: bodyList[2],
+        },
+        { type: "closeTag", tagName: "div", outerNewLine: true },
+        {
+          type: "openTag",
+          tagName: "div",
+          outerNewLine: true,
+          attributes: {
+            style: `color:hotpink; background-color:black;`,
+          },
+        },
+        {
+          type: "html",
+          content: bodyList[3],
+        },
+        { type: "closeTag", tagName: "div", outerNewLine: true },
         { type: "closeTag", tagName: "div", outerNewLine: true },
       ];
     },
     GitMinus(node: any) {
       let body = node.literal;
+      const bodyList = body.split(" ");
+      console.log(bodyList);
       return [
         {
           type: "openTag",
           tagName: "div",
           outerNewLine: true,
-          attributes: { style: `color:black; background-color:hotpink` },
+          attributes: {
+            style: `color: black; background-color: hotpink; display: grid; grid-template-columns: repeat(4, 1fr); line-height: 20px`,
+          },
         },
-        { type: "html", content: body },
+        {
+          type: "openTag",
+          tagName: "div",
+          outerNewLine: true,
+          attributes: {
+            style: `color: black; background-color: hotpink;`,
+          },
+        },
+        {
+          type: "html",
+          content: bodyList[0],
+        },
+        { type: "closeTag", tagName: "div", outerNewLine: true },
+        {
+          type: "openTag",
+          tagName: "div",
+          outerNewLine: true,
+          attributes: {
+            style: `color: black; background-color: hotpink;`,
+          },
+        },
+        {
+          type: "html",
+          content: bodyList[1],
+        },
+        { type: "closeTag", tagName: "div", outerNewLine: true },
+        {
+          type: "openTag",
+          tagName: "div",
+          outerNewLine: true,
+          attributes: {
+            style: `color: black; background-color: hotpink;`,
+          },
+        },
+        {
+          type: "html",
+          content: bodyList[2],
+        },
+        { type: "closeTag", tagName: "div", outerNewLine: true },
+        {
+          type: "openTag",
+          tagName: "div",
+          outerNewLine: true,
+          attributes: {
+            style: `color: black; background-color: hotpink;`,
+          },
+        },
+        {
+          type: "html",
+          content: bodyList[3],
+        },
+        { type: "closeTag", tagName: "div", outerNewLine: true },
         { type: "closeTag", tagName: "div", outerNewLine: true },
       ];
     },
@@ -42,7 +150,10 @@ const gitPlugin = () => {
   return { toHTMLRenderers };
 };
 
-const ViewerContainer = styled.div``;
+const ViewerContainer = styled.div`
+  height: 100%;
+  overflow: auto;
+`;
 
 const MarkdownViewer = ({ files, setFiles }: GithubProps) => {
   const viewerRef = useRef<Viewer>(null);
